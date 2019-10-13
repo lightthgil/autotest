@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2019/3/21 11:43
+# @Author  : Jiang Bo
+# @Site    : 
+# @File    : case_1588_xe_uni_l3uc_e2e_onestep.py
+# @Software: PyCharm
+
+from ptp_uni_l3uc_basecase import *
+
+class TestCase (PtpUniL3UcTestBaseCase) :
+    """
+    TestCase
+    使用拓扑ats5
+    216(master)[1/12]----------[1/3]28(slave)
+    """
+
+    def add_cfg(self):
+        errornum = super(TestCase, self).add_cfg()
+        errornum += self.change_to_twostep()
+        return errornum
+
+if __name__ == "__main__" :
+    case = TestCase('ne1', "L3_INTERFACE_2", 'L3_IP_2', 'NEXT_HOP_2', 'ne3', "L3_INTERFACE_2", 'L3_IP_2', 'NEXT_HOP_2')
+    # case.init_redirection()
+    case.execute()
